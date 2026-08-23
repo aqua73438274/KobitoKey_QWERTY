@@ -39,8 +39,8 @@
         motion-gpios = <&gpio0 2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
         res-cpi = <200>; /* センサー感度 */
 
-        zephyr,axis-x = <INPUT_REL_X>;
-        zephyr,axis-y = <INPUT_REL_Y>;
+        zephyr,axis-x = <INPUT_REL_Y>;
+        zephyr,axis-y = <INPUT_REL_X>;
     };
 };
 
@@ -49,14 +49,14 @@
         compatible = "zmk,input-processor-sensor-rotation";
         status = "okay";
         #input-processor-cells = <0>;
-        rotation-angle = <(90)>;
+        rotation-angle = <(0)>;
     };
 
     sensor_rotation_right: sensor-rotation-right {
         compatible = "zmk,input-processor-sensor-rotation";
         #input-processor-cells = <0>;
         status = "okay";
-        rotation-angle = <(-90)>;
+        rotation-angle = <(0)>;
     };
 };
 
