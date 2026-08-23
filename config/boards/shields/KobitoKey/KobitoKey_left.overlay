@@ -56,7 +56,7 @@
         compatible = "zmk,input-processor-sensor-rotation";
         #input-processor-cells = <0>;
         status = "okay";
-        rotation-angle = <-90>;
+        rotation-angle = <(-90)>;
     };
 };
 
