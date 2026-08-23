@@ -32,6 +32,11 @@ manifest:
     - name: zmk-rgbled-widget  # <-- led
       remote: caksoylar
       revision: v0.3
+
+    # ZMK modules
+    - name: zmk-helpers
+      path: modules/zmk/helpers
+      revision: bc114546392b4615ac90a99140eaf21dde31209d # main (2026-08-18)
       
   self:
     path: config
