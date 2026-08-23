@@ -73,10 +73,10 @@
         layer2 {
             label = "FUNCTION";
             bindings = <
-&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp F1   &kp F2   &kp F3  &kp F4  &kp F5
-&trans        &trans        &trans        &trans        &bt BT_CLR      &kp F6   &kp F7   &kp F8  &kp F9  &kp F10
-&trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &kp F11  &kp F12  &trans  &trans  &trans
-&trans        &trans        &trans        &trans        &trans          &kp DEL  &trans   &trans  &trans  &trans
+&bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp F1   &kp F7  &kp F8  &kp F9  &kp F10
+&trans        &trans        &trans        &trans        &bt BT_CLR      &kp F6   &kp F1  &kp F2  &kp F3  &kp F11
+&trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &kp F11  &kp F4  &kp F5  &kp F6  &kp F12
+&trans        &trans        &trans        &trans        &trans          &trans   &trans  &trans  &trans  &trans
             >;
         };
 
@@ -99,12 +99,12 @@
             >;
         };
 
-        layer_5 {
+        SYB {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&kp GRAVE        &kp LESS_THAN  &kp GREATER_THAN  &kp KP_MINUS       &kp PIPE2      &kp CARET    &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp DOLLAR     &kp BACKSLASH
+&kp EXCLAMATION  &kp ASTERISK   &kp KP_SLASH      &kp EQUAL          &kp AMPERSAND  &kp HASH     &kp LPAR        &kp RPAR         &kp SEMICOLON  &kp DOUBLE_QUOTES
+&kp TILDE        &kp KP_PLUS    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp PERCENT    &kp AT_SIGN  &kp COLON       &kp UNDERSCORE   &kp QUESTION   &kp SINGLE_QUOTE
+&trans           &trans         &trans            &trans             &trans         &trans       &trans          &trans           &trans         &trans
             >;
         };
     };
