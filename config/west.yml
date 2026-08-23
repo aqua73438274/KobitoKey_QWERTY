@@ -29,7 +29,7 @@ manifest:
     # LED
     - name: zmk-rgbled-widget  # <-- led
       remote: caksoylar
-      revision: v0.3
+      revision: main
 
     # ZMK modules
     - name: zmk-helpers
