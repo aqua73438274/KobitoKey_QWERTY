@@ -77,10 +77,10 @@
 
         layer_4 {
             bindings = <
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-&trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+&trans                      &trans                  &trans             &trans                   &trans                       &trans                      &kp LC(C)              &kp UP_ARROW    &kp LC(P)               &trans
+&kp LC(LS(LA(LEFT_ARROW)))  &kp LG(LEFT_ARROW)      &trans             &kp LG(RIGHT_ARROW)      &kp LS(LA(LC(RIGHT_ARROW)))  &kp LA(LC(LG(LEFT_ARROW)))  &kp LEFT_ARROW         &kp DOWN_ARROW  &kp RIGHT_ARROW         &kp LA(LC(LG(RIGHT_ARROW)))
+&kp LG(UP_ARROW)            &kp LG(LS(LEFT_ARROW))  &kp LC(LA(LG(P)))  &kp LG(LS(RIGHT_ARROW))  &trans                       &kp F5                      &kp LS(LC(PAGE_DOWN))  &kp LC(T)       &kp LS(PAGE_UP)         &kp LC(W)
+&trans                      &trans                  &lt 1 A            &lt 1 A                  &lt 1 A                      &lt 1 A                     &lt 1 A                &lt 1 A         &kp LG(LC(LEFT_ARROW))  &kp LG(LC(RIGHT_ARROW))
             >;
         };
 
