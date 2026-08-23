@@ -1,4 +1,7 @@
 manifest:
+  defaults:
+    remote: urob
+    
   remotes:
     - name: urob
       url-base: https://github.com/urob
@@ -15,7 +18,7 @@ manifest:
     # ZMK 本体。公式の app/west.yml を取り込む
     - name: zmk
       remote: zmkfirmware
-      revision: v0.3
+      revision: 6e2ef41e022d555b10f116e395832913f71717b3 # main (2026-08-18)
       import: app/west.yml
 
     # PMW3610 ドライバ（外部モジュール）
