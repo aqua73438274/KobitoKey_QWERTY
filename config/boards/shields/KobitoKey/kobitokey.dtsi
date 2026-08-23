@@ -2,6 +2,7 @@
 #include <dt-bindings/zmk/input_transform.h>
 #include "KobitoKey-layouts.dtsi"
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 / {
     /* 行列スキャン：rowは左右共通、colは左右で分ける */
@@ -75,5 +76,11 @@
     /* ★ デフォルトで使うレイアウトを chosen で指す */
     chosen {
         zmk,physical-layout = &physical_layout0;
+    };
+
+    aliases {
+        led-red = &led0;
+        led-green = &led1;
+        led-blue = &led2;
     };
 };
