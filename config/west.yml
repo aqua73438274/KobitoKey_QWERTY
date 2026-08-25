@@ -32,9 +32,24 @@ manifest:
       revision: main
 
     # ZMK modules
+    - name: zmk-adaptive-key
+      path: modules/zmk/adaptive-key
+      revision: e5b335a7b1076cb122582f5a892b118b02a3be34 # main (2026-08-18)
+    - name: zmk-auto-layer
+      path: modules/zmk/auto-layer
+      revision: 62c201934711369d50a28df12e1d055d05cb6460 # main (2026-08-18)
     - name: zmk-helpers
       path: modules/zmk/helpers
       revision: bc114546392b4615ac90a99140eaf21dde31209d # main (2026-08-18)
+    - name: zmk-leader-key
+      path: modules/zmk/leader-key
+      revision: e894d9afa5164b7fff641db4194fc3d4d6e84bbb # main (2026-08-18)
+    - name: zmk-tri-state
+      path: modules/zmk/tri-state
+      revision: 269b13eb3f5491292b627ac3892589af32de3e17 # main (2026-08-18)
+    - name: zmk-unicode
+      path: modules/zmk/unicode
+      revision: a1e3d3eed54dea800b5342a251eb3b83eee3b5ec # main (2026-08-18)
       
   self:
     path: config
