@@ -7,29 +7,244 @@
 #include <zmk-helpers/helper.h> // Requires zmk-helpers module.
 #include "boards/shields/KobitoKey/includes/40.h"
 
+#define HM_TAPPING_TERM 280           // urob 流: 280ms (prior-idle ゲートがあるため長くても無害)
+#define HM_PRIOR_IDLE 150             // urob 流: 150ms — timeless の肝。直前打鍵から 150ms 以内は即タップ
+#define HM_QUICK_TAP 175              // urob 流: 175ms — 連打/リピート時の即時再タップ
+#define COMBO_TERM 30          // 同指縦コンボ用: 指間ズレが無いので短く (ロール誤爆抑止)
+#define COMBO_TERM_HORIZ 60    // 別指横並び用: 中指先行/相方指の遅れを吸収する緩め timeout
+#define COMBO_TERM_WIDE 75     // index+小指 (J+; 等) 用: 小指の遅れを吸収 (FN 対策)
+#define COMBO_IDLE 175         // combo 既定 require-prior-idle-ms: 打鍵流中は combo を無効化
 
-/* Homerow mods */
-#define MAKE_HRM(NAME, HOLD, TAP, TRIGGER_POS)                                 \
-  ZMK_HOLD_TAP(NAME, bindings = <HOLD>, <TAP>; flavor = "balanced";            \
-               tapping-term-ms = <280>; quick-tap-ms = <QUICK_TAP_MS>;         \
-               require-prior-idle-ms = <150>; hold-trigger-on-release;         \
-               hold-trigger-key-positions = <TRIGGER_POS>;)
+// https://github.com/urob/zmk-config/tree/main#timeless-homerow-mods
 
-MAKE_HRM(hml, &kp, &kp, KEYS_R THUMBS) // Left-hand HRMs.
-MAKE_HRM(hmr, &kp, &kp, KEYS_L THUMBS) // Right-hand HRMs.
-
-// Hack: Make HRM combos tap-only (cf, ZMK issue #544).
-#define ZMK_COMBO_8(NAME, TAP, POS, LAYERS, COMBO_MS, IDLE_MS, HOLD, SIDE)     \
-  MAKE_HRM(hm_combo_##NAME, &kp, TAP, SIDE THUMBS)                             \
-  ZMK_COMBO_6(NAME, &hm_combo_##NAME HOLD 0, POS, LAYERS, COMBO_MS, IDLE_MS)
-
-/* Combos, leader key sequences, mouse emulation */
-
-#include "boards/shields/KobitoKey/combos.dtsi" // Must be sourced after HRM-combo hack.
-
-
+#define KEYS_L LT0 LT1 LT2 LT3 LT4 LT5 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LB2 LB3 LB4 LB5  // left hand
+#define KEYS_R RT0 RT1 RT2 RT3 RT4 RT5 RM0 RM1 RM2 RM3 RM4 RM5 RB0 RB1 RB2 RB3 RB4 RB5  // right hand
+#define THUMBS LH4 LH3 LH2 LH1 LH0 RH0 RH1 RH2 RH3 RH4
+#define KEYS_T LH4 LH3 LH2 LH1 LH0 RH0 RH1 RH2 RH3 RH4
+#define ZMK_POINTING_DEFAULT_SCRL_VAL 15
 
 / {
+    // Activate ADJUST layer by pressing raise and lower
+
+    behaviors {
+        hm_l: homerow_mods_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+
+            flavor = "balanced";
+            tapping-term-ms = <HM_TAPPING_TERM>;
+            quick-tap-ms = <HM_QUICK_TAP>;
+            require-prior-idle-ms = <HM_PRIOR_IDLE>;
+            hold-trigger-key-positions = <KEYS_R KEYS_T>;
+            hold-trigger-on-release;
+        };
+
+        hm_r: homerow_mods_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+
+            flavor = "balanced";
+            tapping-term-ms = <HM_TAPPING_TERM>;
+            quick-tap-ms = <HM_QUICK_TAP>;
+            require-prior-idle-ms = <HM_PRIOR_IDLE>;
+            hold-trigger-key-positions = <KEYS_L KEYS_T>;
+            hold-trigger-on-release;
+        };
+
+        // hm_shift_l / hm_shift_r (Townk 流 prior-idle=0) は 2026-06 に撤去。
+        // 速打時の Shift 暴発源だったため、Shift も hm_l/hm_r の一律 timeless 値へ統一。
+
+        /*
+         * Non-Positional Homerow Mods
+         * Used for &mm_grescm_gui behavior on left hand.
+         *
+         * Usage: &hm LSHFT T
+         * Tap: T
+         * Tap-Tap-Hold: Repeat T
+         * Hold: LSHIFT
+         */
+
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+
+            flavor = "balanced";
+            tapping-term-ms = <HM_TAPPING_TERM>;
+            quick-tap-ms = <200>;
+        };
+
+        bs_del: bs_del {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp BSPC>, <&kp DEL>;
+
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        lt: layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+
+            flavor = "hold-preferred";
+            tapping-term-ms = <HM_TAPPING_TERM>;
+            quick-tap-ms = <200>;
+        };
+
+        // lt_g: tap-preferred layer-tap (used for G → Navi)
+        // 値は main ブランチ準拠 (filterpaper 流の HM 定数を継承せず固定)
+        // ユーザの打鍵感覚で main の挙動が最も自然と確認済み (2026-05-29)
+
+        lt_g: layer_tap_g {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+
+            flavor = "tap-preferred";
+            tapping-term-ms = <250>;
+            quick-tap-ms = <200>;
+            require-prior-idle-ms = <70>;
+        };
+
+        // urob zmk-leader-key モジュール (2026-06 導入)
+        // 開始キー (combo E+I) → 後続の並びで IDE ジェスチャ等を発火する namespace。
+        // このモジュール版は timeout/layers/immediate-trigger を持たない:
+        //   有効な並びが揃うまで待機し、無効キーで中断する (せかされない代わりに宙ぶらりんに注意)。
+        // 並びはキーコード列 (README の <U S B>=“usb” と同形式)。bindings には任意 behavior/マクロ可。
+        leader: leader {
+            compatible = "zmk,behavior-leader-key";
+            #binding-cells = <0>;
+
+            ldr_cc { sequence = <C C>; bindings = <&ctrl_ctrl>; };    // leader→c c : Ctrl 二連打
+            ldr_ss { sequence = <S S>; bindings = <&shift_shift>; };  // leader→s s : Shift 二連打
+            // 追加例: ldr_run { sequence = <R>; bindings = <&kp F10 等>; };
+            //   Run/Debug は IDE のショートカット (例 IntelliJ: Shift+F10/F9) を教われば足せる。
+        };
+
+        // === combo 用 mod-morph (shift / alt 連動) ===
+        cm_quote: cm_quote {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp SQT>, <&kp DQT>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        cm_lpar: cm_lpar {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp LPAR>, <&kp LT>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        cm_rpar: cm_rpar {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp RPAR>, <&kp GT>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        cm_lbkt: cm_lbkt {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp LBKT>, <&kp LBRC>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        cm_rbkt: cm_rbkt {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp RBKT>, <&kp RBRC>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+        // df combo: 通常は leader、Alt 保持中は Tab (keep-mods で Alt を残し Alt+Tab に)
+        df_lead: df_lead {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&leader>, <&kp TAB>;
+            mods = <(MOD_LALT|MOD_RALT)>;
+            keep-mods = <(MOD_LALT|MOD_RALT)>;
+        };
+    };
+
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+
+        adjust_layer {
+            if-layers = <2 1>;
+            then-layer = <3>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        // 全 combo 共通: timeout-ms=COMBO_TERM(30) でロール誤爆抑止 / require-prior-idle-ms=COMBO_IDLE(175)。
+        // 不発が出たら個別に timeout-ms を上げる。とくに「同指縦コンボ」(ws/ed/rf/tg/yh/uj/ik/ol,
+        // sx/dc/fv/gb/hn/jm/k,/l.) は構造上ロール誤爆に強いが timeout=30 で不発になりやすい筆頭。
+
+        // --- 編集 / ナビ ---
+        cb_kp_esc    { key-positions = <1 2>;   bindings = <&kp ESC>;   layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // W+E
+        cb_kp_tab    { key-positions = <13 14>; bindings = <&kp TAB>;   layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // S+D
+        cb_kp_del    { key-positions = <8 9>;   bindings = <&kp DEL>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // U+I  (横並び: 緩め)
+        cb_kp_bs     { key-positions = <9 10>;  bindings = <&bs_del>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // I+O  (Shift=DEL, 横並び: 緩め)
+        cb_kp_insert { key-positions = <10 20>; bindings = <&kp INS>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // O+J  (横並び: 緩め)
+        cb_kp_enter  { key-positions = <20 23>; bindings = <&kp ENTER>; layers = <0>; timeout-ms = <COMBO_TERM_WIDE>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+; (widechord)
+        cb_leader    { key-positions = <14 15>; bindings = <&df_lead>;  layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
+
+        // --- 記号 (単純 &kp) ---
+        cb_at        { key-positions = <1 13>;  bindings = <&kp AT>;        layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // W+S
+        cb_hash      { key-positions = <2 14>;  bindings = <&kp HASH>;      layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // E+D
+        cb_dollar    { key-positions = <3 15>;  bindings = <&kp DOLLAR>;    layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // R+F
+        cb_percent   { key-positions = <4 16>;  bindings = <&kp PERCENT>;   layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // T+G
+        cb_caret     { key-positions = <7 19>;  bindings = <&kp CARET>;     layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // Y+H
+        cb_plus      { key-positions = <8 20>;  bindings = <&kp PLUS>;      layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // U+J
+        cb_asterisk  { key-positions = <9 21>;  bindings = <&kp ASTERISK>;  layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // I+K
+        cb_amp       { key-positions = <10 22>; bindings = <&kp AMPERSAND>; layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // O+L
+        cb_grave     { key-positions = <13 25>; bindings = <&kp GRAVE>;     layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // S+X
+        cb_bslh      { key-positions = <14 26>; bindings = <&kp BSLH>;      layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // D+C
+        cb_equal     { key-positions = <15 27>; bindings = <&kp EQUAL>;     layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // F+V
+        cb_tilde     { key-positions = <16 28>; bindings = <&kp TILDE>;     layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // G+B (旧 Space を置換)
+        cb_under     { key-positions = <19 33>; bindings = <&kp UNDER>;     layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // H+N
+        cb_minus     { key-positions = <20 34>; bindings = <&kp MINUS>;     layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+M
+        cb_fslh      { key-positions = <21 35>; bindings = <&kp FSLH>;      layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // K+,
+        cb_pipe      { key-positions = <22 36>; bindings = <&kp PIPE>;      layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // L+.
+
+        // --- 括弧 / 引用符 (shift 連動 mod-morph) ---
+        cb_quote     { key-positions = <20 22>; bindings = <&cm_quote>; layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+L: ' / "  (横並び: 緩め)
+        cb_lpar      { key-positions = <20 21>; bindings = <&cm_lpar>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+K: ( / <  (横並び: 緩め)
+        cb_rpar      { key-positions = <21 22>; bindings = <&cm_rpar>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // K+L: ) / >  (横並び: 緩め)
+        cb_lbkt      { key-positions = <34 35>; bindings = <&cm_lbkt>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // M+,: [ / {  (横並び: 緩め)
+        cb_rbkt      { key-positions = <35 36>; bindings = <&cm_rbkt>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // ,+.: ] / }  (横並び: 緩め)
+
+        // --- Ins/Del 派生 ---
+        cb_ctrl_ins  { key-positions = <25 26>; bindings = <&kp LC(INS)>; layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // X+C
+        cb_shift_ins { key-positions = <26 27>; bindings = <&kp LS(INS)>; layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // C+V
+        cb_shift_del { key-positions = <25 27>; bindings = <&kp LS(DEL)>; layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // X+V
+    };
+
+    macros {
+        // my_macro_zenhan (Alt+`) を撤去 (2026-06: zenhan combo 撤去で参照ゼロの dead code 化)。
+        //   全/半 切替を再度キーに割り当てたくなったら、この Alt+` tap マクロを復活させる。
+
+        // IDE ジェスチャ: 同一修飾の二連打 (host に double-tap として検出させる)
+        // wait/tap を短めにして二打を「連続」と認識させる。IDE が拾わなければ値を調整。
+        ctrl_ctrl: ctrl_ctrl {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LCTRL>, <&kp LCTRL>;
+            label = "CTRL_CTRL";
+        };
+
+        shift_shift: shift_shift {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LSHFT>, <&kp LSHFT>;
+            label = "SHIFT_SHIFT";
+        };
+    };
 
     keymap {
         compatible = "zmk,keymap";
