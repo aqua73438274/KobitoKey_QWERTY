@@ -33,5 +33,14 @@ manifest:
       remote: caksoylar
       revision: v0.3
       
+    - name: zmk-helpers
+      remote: urob
+      revision: v0.3.0
+    # urob leader-key モジュール (ZMK main 未収録機能をモジュール提供)
+    # urob 推奨: revision は ZMK 本体 (上の zmk project) と揃える
+    - name: zmk-leader-key
+      remote: urob
+      revision: v0.3.0
+      
   self:
     path: config
