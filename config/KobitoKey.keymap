@@ -247,10 +247,10 @@
 
         default_layer {
             bindings = <
-&kp B           &lt 2 Z         &kp D             &kp F        &kp MINUS  &kp SPACE  &kp J        &kp O              &lt 2 U          &kp Q
-&mt LEFT_GUI H  &mt LEFT_ALT R  &mt LEFT_SHIFT S  &mt LCTRL T  &kp G      &kp Y      &mt RCTRL N  &mt RIGHT_SHIFT A  &mt RIGHT_ALT I  &mt RIGHT_GUI E
-&kp P           &kp L           &kp M             &kp C        &kp K      &kp X      &kp W        &kp COMMA          &kp DOT          &kp V
-&kp LSHFT       &kp LALT        &lt 2 A           &lt 1 SPACE  &lt 3 A    &lt 5 A    &lt 5 ENTER  &lt 4 A            &kp RSHFT        &mt LALT SLASH
+&kp B           &lt_g 2 Z       &kp D             &kp F         &kp MINUS  &kp SPACE  &kp J           &kp O              &lt_g 2 U        &kp Q
+&hm_l  LGUI H   &hm_l LALT R    &hm_l LSHFT S     &hm_l LCTRL T &kp G      &kp Y      &hm_r  LCTRL N  &hm_r  LSHFT A     &hm_r  LALT I    &hm_r  LGUI E
+&kp P           &kp L           &kp M             &kp C         &kp K      &kp X      &kp W           &kp COMMA          &kp DOT          &kp V
+&kp LSHFT       &kp LALT        &lt 2 A           &lt 1 SPACE   &lt 3 A    &lt 5 A    &lt 5 ENTER     &lt 4 A            &kp RSHFT        &mt LALT SLASH
             >;
         };
 
@@ -260,7 +260,7 @@
 &kp COLON       &kp LESS_THAN   &kp GREATER_THAN  &kp KP_LPAR  &kp KP_RPAR    &kp CARET        &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PERCENT
 &mt LEFT_GUI X  &mt LEFT_ALT C  &mt LEFT_SHIFT B  &mt LCTRL A  &kp KP_MINUS   &kp KP_PLUS      &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_EQUAL
 &kp AT_SIGN     &kp F           &kp E             &kp D        &kp KP_DIVIDE  &kp KP_ASTERISK  &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp DOT
-&trans          &trans          &trans            &kp LSHFT    &trans         &trans           &trans           &kp KP_NUMBER_0  &trans           &trans
+&trans          &trans          &trans            &kp LSHFT    &trans         &trans           &ENTER           &kp KP_NUMBER_0  &trans           &trans
             >;
         };
 
@@ -286,7 +286,7 @@
         MOS {
             label = "MOUSE";
             bindings = <
-&trans     &trans  &trans    &trans    &trans  &trans  &mkp MB1  &mkp MB3  &mkp MB2  &trans
+&trans     &trans  &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
 &trans     &trans  &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
 &trans     &trans  &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
 &kp LSHFT  &trans  &kp LCMD  &kp LALT  &to 0   &trans  &trans    &trans    &to 0     &kp RALT
