@@ -190,8 +190,8 @@
         cb_mb1       { key-positions =  <RT0 RT1>; bindings = <&mkp MB1>;  layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
         cb_mb2       { key-positions =  <RT0 RT1 RT2>; bindings = <&mkp MB2>;  layers = <0>; timeout-ms = <COMBO_TERM_WIDE>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
         cb_mb3       { key-positions =  <RT0 RM0>; bindings = <&mkp MB3>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
-        cb_mb4       { key-positions =  <RM0 RM1 RM2>; bindings = <&mkp MB>;  layers = <0>; timeout-ms = <COMBO_TERM_WIDE>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
-        cb_mb5       { key-positions =  <RB0 RB1 RB2>; bindings = <&mkp MB1>;  layers = <0>; timeout-ms = <COMBO_TERM_WIDE>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
+        cb_mb4       { key-positions =  <RM0 RM1 RM2>; bindings = <&mkp MB4>;  layers = <0>; timeout-ms = <COMBO_TERM_WIDE>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
+        cb_mb5       { key-positions =  <RB0 RB1 RB2>; bindings = <&mkp MB5>;  layers = <0>; timeout-ms = <COMBO_TERM_WIDE>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
 
         // --- 記号 (単純 &kp) ---
         cb_at        { key-positions = <1 13>;  bindings = <&kp AT>;        layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // W+S
