@@ -178,13 +178,13 @@
         // sx/dc/fv/gb/hn/jm/k,/l.) は構造上ロール誤爆に強いが timeout=30 で不発になりやすい筆頭。
 
         // --- 編集 / ナビ ---
-        cb_kp_esc    { key-positions = <1 2>;   bindings = <&kp ESC>;   layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // W+E
-        cb_kp_tab    { key-positions = <13 14>; bindings = <&kp TAB>;   layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // S+D
-        cb_kp_del    { key-positions = <8 9>;   bindings = <&kp DEL>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // U+I  (横並び: 緩め)
-        cb_kp_bs     { key-positions = <9 10>;  bindings = <&bs_del>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // I+O  (Shift=DEL, 横並び: 緩め)
-        cb_kp_insert { key-positions = <10 20>; bindings = <&kp INS>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // O+J  (横並び: 緩め)
-        cb_kp_enter  { key-positions = <20 23>; bindings = <&kp ENTER>; layers = <0>; timeout-ms = <COMBO_TERM_WIDE>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+; (widechord)
-        cb_leader    { key-positions = <14 15>; bindings = <&df_lead>;  layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
+        cb_kp_esc    { key-positions = <LM3 LM2>;   bindings = <&kp ESC>;   layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // W+E
+        cb_kp_tab    { key-positions = <LM4 LM3>; bindings = <&kp TAB>;   layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // S+D
+        cb_kp_del    { key-positions = <RT3 RT2>;   bindings = <&kp DEL>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // U+I  (横並び: 緩め)
+        cb_kp_bs     { key-positions = <RT1 RT2>;  bindings = <&bs_del>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // I+O  (Shift=DEL, 横並び: 緩め)
+        //cb_kp_insert { key-positions = <10 20>; bindings = <&kp INS>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // O+J  (横並び: 緩め)
+        //cb_kp_enter  { key-positions = <20 23>; bindings = <&kp ENTER>; layers = <0>; timeout-ms = <COMBO_TERM_WIDE>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+; (widechord)
+        cb_leader    { key-positions =  <LM4 LM3 LM3>; bindings = <&df_lead>;  layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
 
         // --- 記号 (単純 &kp) ---
         cb_at        { key-positions = <1 13>;  bindings = <&kp AT>;        layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // W+S
