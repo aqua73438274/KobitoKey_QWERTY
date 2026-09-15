@@ -220,7 +220,9 @@
         cb_kp_f11     { key-positions = <RT3 RM3>;  bindings = <&kp F11>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // I+O  (Shift=DEL, 横並び: 緩め)
         cb_kp_f10     { key-positions = <RT2 RT3 RM1>;  bindings = <&kp F10>;   layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // I+O  (Shift=DEL, 横並び: 緩め)
         cb_kp_f7      { key-positions = <RB1 RM2 RM3>;  bindings = <&kp F7>;   layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // I+O  (Shift=DEL, 横並び: 緩め)
-
+        cb_kp_copy    { key-positions = <RM3 RM2 RM4>;   bindings = <&kp K_COPY>;   layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // U+I  (横並び: 緩め)
+        cb_kp_past    { key-positions = <RM3 RM2 RM4 RM5>;   bindings = <&kp K_PASTE>;   layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // U+I  (横並び: 緩め)
+ 
 
         // --- mouse / (&mkp) ---
         cb_mb1       { key-positions =  <RT0 RT1>; bindings = <&mkp MB1>;  layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
@@ -251,16 +253,16 @@
         cb_minus     { key-positions = <RM3 RM1>; bindings = <&cm_mins>;     layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+M
 
         // --- 括弧 / 引用符 (shift 連動 mod-morph) ---
-        cb_quote     { key-positions = <20 22>; bindings = <&cm_quote>; layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+L: ' / "  (横並び: 緩め)
-        cb_lpar      { key-positions = <20 21>; bindings = <&cm_lpar>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+K: ( / <  (横並び: 緩め)
-        cb_rpar      { key-positions = <21 22>; bindings = <&cm_rpar>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // K+L: ) / >  (横並び: 緩め)
-        cb_lbkt      { key-positions = <34 35>; bindings = <&cm_lbkt>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // M+,: [ / {  (横並び: 緩め)
-        cb_rbkt      { key-positions = <35 36>; bindings = <&cm_rbkt>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // ,+.: ] / }  (横並び: 緩め)
+        //cb_quote     { key-positions = <20 22>; bindings = <&cm_quote>; layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+L: ' / "  (横並び: 緩め)
+        //cb_lpar      { key-positions = <20 21>; bindings = <&cm_lpar>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+K: ( / <  (横並び: 緩め)
+        //cb_rpar      { key-positions = <21 22>; bindings = <&cm_rpar>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // K+L: ) / >  (横並び: 緩め)
+        //cb_lbkt      { key-positions = <34 35>; bindings = <&cm_lbkt>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // M+,: [ / {  (横並び: 緩め)
+        //cb_rbkt      { key-positions = <35 36>; bindings = <&cm_rbkt>;  layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // ,+.: ] / }  (横並び: 緩め)
 
         // --- Ins/Del 派生 ---
-        cb_ctrl_ins  { key-positions = <25 26>; bindings = <&kp LC(INS)>; layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // X+C
-        cb_shift_ins { key-positions = <26 27>; bindings = <&kp LS(INS)>; layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // C+V
-        cb_shift_del { key-positions = <25 27>; bindings = <&kp LS(DEL)>; layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // X+V
+        //cb_ctrl_ins  { key-positions = <25 26>; bindings = <&kp LC(INS)>; layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // X+C
+        //cb_shift_ins { key-positions = <26 27>; bindings = <&kp LS(INS)>; layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // C+V
+        //cb_shift_del { key-positions = <25 27>; bindings = <&kp LS(DEL)>; layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // X+V
     };
 
     macros {
@@ -304,8 +306,8 @@
             label = "NUMBER";
             bindings = <
 &kp COLON       &kp LESS_THAN   &kp GREATER_THAN  &kp KP_LPAR  &kp KP_RPAR    &kp CARET        &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PERCENT
-&mt LEFT_GUI X  &mt LEFT_ALT C  &mt LEFT_SHIFT B  &mt LCTRL A  &kp KP_MINUS   &kp KP_PLUS      &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_EQUAL
-&kp AT_SIGN     &kp F           &kp E             &kp D        &kp KP_DIVIDE  &kp KP_ASTERISK  &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp DOT
+&mt LEFT_GUI X  &mt LEFT_ALT C  &mt LEFT_SHIFT B  &mt LCTRL A  &kp KP_MINUS   &kp KP_PLUS      &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_EQUAL
+&kp AT_SIGN     &kp F           &kp E             &kp D        &kp KP_DIVIDE  &kp KP_ASTERISK  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp DOT
 &trans          &trans          &trans            &kp LSHFT    &trans         &trans           &kp ENTER        &kp KP_NUMBER_0  &trans           &trans
             >;
         };
