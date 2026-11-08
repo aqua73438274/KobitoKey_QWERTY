@@ -317,7 +317,7 @@
 &kp GRAVE        &kp LESS_THAN  &kp GREATER_THAN  &kp KP_MINUS       &kp PIPE2      &kp CARET    &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp DOLLAR     &kp BACKSLASH
 &cm_excl         &kp ASTERISK   &kp KP_SLASH      &kp EQUAL          &kp AMPERSAND  &kp HASH     &kp LPAR        &kp RPAR         &kp SEMICOLON  &kp DOUBLE_QUOTES
 &kp TILDE        &kp KP_PLUS    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp PERCENT    &kp AT_SIGN  &kp COLON       &kp UNDERSCORE   &kp QUESTION   &kp SINGLE_QUOTE
-&trans           &trans         &trans            &tyrans             &trans         &trans       &trans          &trans           &trans         &trans
+&trans           &trans         &trans            &trans             &trans         &trans       &trans          &trans           &trans         &trans
             >;
         };
 
