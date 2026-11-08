@@ -302,7 +302,7 @@
         };
 
         NUM {
-            label = "NUMBER";
+            label = "NUM";
             bindings = <
 &kp COLON       &kp LESS_THAN   &kp GREATER_THAN  &kp KP_LPAR  &kp KP_RPAR    &kp CARET        &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PERCENT
 &mt LEFT_GUI X  &mt LEFT_ALT C  &mt LEFT_SHIFT B  &mt LCTRL A  &kp KP_MINUS   &kp KP_PLUS      &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_EQUAL
@@ -312,6 +312,7 @@
         };
 
         SYB {
+            label = "SYB";
             bindings = <
 &kp GRAVE        &kp LESS_THAN  &kp GREATER_THAN  &kp KP_MINUS       &kp PIPE2      &kp CARET    &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp DOLLAR     &kp BACKSLASH
 &cm_excl         &kp ASTERISK   &kp KP_SLASH      &kp EQUAL          &kp AMPERSAND  &kp HASH     &kp LPAR        &kp RPAR         &kp SEMICOLON  &kp DOUBLE_QUOTES
@@ -321,7 +322,7 @@
         };
 
         FUNC {
-            label = "FUNCTION";
+            label = "FUNC";
             bindings = <
 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp F1   &kp F7  &kp F8  &kp F9  &kp F10
 &trans        &trans        &trans        &trans        &bt BT_CLR      &kp F6   &kp F1  &kp F2  &kp F3  &kp F11
@@ -331,7 +332,7 @@
         };
 
         MOS {
-            label = "MOUSE";
+            label = "MOS";
             bindings = <
 &trans     &trans  &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
 &trans     &trans  &trans    &trans    &trans  &trans  &trans    &trans    &trans    &trans
@@ -341,6 +342,7 @@
         };
 
         NAV {
+            label = "NAV";
             bindings = <
 &trans                      &trans                  &trans             &trans                   &trans                       &trans                      &kp LC(C)              &kp UP_ARROW    &kp LC(P)               &trans
 &kp LC(LS(LA(LEFT_ARROW)))  &kp LG(LEFT_ARROW)      &trans             &kp LG(RIGHT_ARROW)      &kp LS(LA(LC(RIGHT_ARROW)))  &kp LA(LC(LG(LEFT_ARROW)))  &kp LEFT_ARROW         &kp DOWN_ARROW  &kp RIGHT_ARROW         &kp LA(LC(LG(RIGHT_ARROW)))
