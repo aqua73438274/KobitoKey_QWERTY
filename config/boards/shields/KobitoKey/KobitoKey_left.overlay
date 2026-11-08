@@ -64,7 +64,7 @@
     scroll_inertia_v: scroll_inertia_v {
         compatible = "zmk,input-processor-scroll-inertia";
         #input-processor-cells = <0>;
-        axis = <1>; 
+        axis = <0>; 
         start = <15>;
         move = <30>;
     };
