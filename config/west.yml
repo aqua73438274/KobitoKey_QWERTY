@@ -12,9 +12,7 @@ manifest:
     - name: hsgw
       url-base: https://github.com/hsgw
     - name: caksoylar  # <-- led
-      url-base: https://github.com/caksoylar
-    - name: mjmjm0101
-      url-base: https://github.com/mjmjm0101
+      url-base: https://github.com/caksoylarN
 
   projects:
     # ZMK 本体。公式の app/west.yml を取り込む
