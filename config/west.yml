@@ -10,6 +10,8 @@ manifest:
       url-base: https://github.com/caksoylar  
     - name: urob
       url-base: https://github.com/urob
+    - name: mjmjm0101
+      url-base: https://github.com/mjmjm0101
 
   projects:
     # ZMK 本体。公式の app/west.yml を取り込む
@@ -43,6 +45,9 @@ manifest:
     - name: zmk-leader-key
       remote: urob
       revision: v0.3.0
+    - name: zmk-input-processor-scroll-inertia
+      remote: mjmjm0101
+      revision: main
       
   self:
     path: config
