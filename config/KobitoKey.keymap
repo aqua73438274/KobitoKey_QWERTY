@@ -208,7 +208,7 @@
         cb_kp_bs     { key-positions = <RT1 RT2>;  bindings = <&bs_del>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // I+O  (Shift=DEL, 横並び: 緩め)
         //cb_kp_insert { key-positions = <10 20>; bindings = <&kp INS>;   layers = <0>; timeout-ms = <COMBO_TERM_HORIZ>; require-prior-idle-ms = <COMBO_IDLE>; };  // O+J  (横並び: 緩め)
         //cb_kp_enter  { key-positions = <20 23>; bindings = <&kp ENTER>; layers = <0>; timeout-ms = <COMBO_TERM_WIDE>; require-prior-idle-ms = <COMBO_IDLE>; };  // J+; (widechord)
-        cb_leader    { key-positions =  <LM4 LM3 LM3>; bindings = <&df_lead>;  layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
+        cb_leader    { key-positions =  <LM4 LM3 LM2>; bindings = <&df_lead>;  layers = <0>; timeout-ms = <COMBO_TERM>;      require-prior-idle-ms = <COMBO_IDLE>; };  // D+F = leader / Alt+Tab
         cb_kp_rght    { key-positions = <RM3 RM2>;   bindings = <&kp RIGHT>;   layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // U+I  (横並び: 緩め)
         cb_kp_left    { key-positions = <RM1 RM2>;  bindings = <&kp LEFT>;   layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // I+O  (Shift=DEL, 横並び: 緩め)
         cb_kp_down    { key-positions = <RM3 RT2>;   bindings = <&kp DOWN>;   layers = <0>; timeout-ms = <COMBO_TERM>; require-prior-idle-ms = <COMBO_IDLE>; };  // U+I  (横並び: 緩め)
@@ -293,12 +293,12 @@
         compatible = "zmk,keymap";
 
         default_layer {
-            bindings = <
+        bindings = <
 &kp B           &lt_g 2 Z       &kp D             &kp F         &kp MINUS  &kp SPACE  &kp J           &kp O              &lt_g 2 U        &kp Q
 &hm_l  LGUI H   &hm_l LALT R    &hm_l LSHFT S     &hm_l LCTRL T &kp G      &kp Y      &hm_r  LCTRL N  &hm_r  LSHFT A     &hm_r  LALT I    &hm_r  LGUI E
 &kp P           &kp L           &kp M             &kp C         &kp K      &kp X      &kp W           &kp COMMA          &kp DOT          &kp V
-&kp LSHFT       &kp LALT        &lt 2 A           &lt 1 SPACE   &lt 3 A    &lt 5 A    &lt 5 ENTER     &lt 4 A            &kp RSHFT        &mt LALT SLASH
-            >;
+&kp LANGUAGE_2  &kp LALT        &lt 2 A           &lt 1 SPACE   &lt 3 A    &lt 5 A    &lt 5 ENTER     &lt 4 A            &kp RSHFT        &kp LANGUAGE_1
+            >; 
         };
 
         NUM {
@@ -317,7 +317,7 @@
 &kp GRAVE        &kp LESS_THAN  &kp GREATER_THAN  &kp KP_MINUS       &kp PIPE2      &kp CARET    &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp DOLLAR     &kp BACKSLASH
 &cm_excl         &kp ASTERISK   &kp KP_SLASH      &kp EQUAL          &kp AMPERSAND  &kp HASH     &kp LPAR        &kp RPAR         &kp SEMICOLON  &kp DOUBLE_QUOTES
 &kp TILDE        &kp KP_PLUS    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp PERCENT    &kp AT_SIGN  &kp COLON       &kp UNDERSCORE   &kp QUESTION   &kp SINGLE_QUOTE
-&trans           &trans         &trans            &trans             &trans         &trans       &trans          &trans           &trans         &trans
+&trans           &trans         &trans            &tyrans             &trans         &trans       &trans          &trans           &trans         &trans
             >;
         };
 
