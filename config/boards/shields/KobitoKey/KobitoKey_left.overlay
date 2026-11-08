@@ -58,6 +58,20 @@
         status = "okay";
         rotation-angle = <(24)>;
     };
+j                 
+    scroll_inertia_v: scroll_inertia_v {
+        compatible = "zmk,input-processor-scroll-inertia";
+        #input-processor-cells = <0>;
+        axis = <1>; /* 1: 縦スクロール専用 (2なら横, 0なら2D自由) */
+
+        /* 
+         * ※ tb_left の cpi が <200> と低めの場合、
+         * デフォルト (start=40, move=80) だとフリックと認識されにくいため、
+         * 発動のしきい値を低めに設定しておくと発動しやすくなります。
+         */
+        start = <15>;
+        move = <30>;
+    };
 };
 
 &tb_left_listener {
@@ -69,6 +83,7 @@
             <&zip_x_scaler 0 1>,
             <&zip_y_scaler 1 15>,
             <&zip_xy_to_scroll_mapper>,
+            <&scroll_inertia_v>,
             <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
             <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>;
     };
