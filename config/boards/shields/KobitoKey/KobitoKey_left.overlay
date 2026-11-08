@@ -60,14 +60,6 @@
         rotation-angle = <24>;
     };
 
-    scroll_inertia_v: scroll_inertia_v {
-        compatible = "zmk,input-processor-scroll-inertia";
-        #input-processor-cells = <0>;
-        axis = <1>; 
-        start = <15>;
-        move = <30>;
-    };
-
     /omit-if-no-ref/ zip_temp_layer: zip_temp_layer {
         compatible = "zmk,input-processor-temp-layer";
         #input-processor-cells = <2>;
@@ -84,7 +76,6 @@
             <&zip_x_scaler 0 1>,
             <&zip_y_scaler 1 5>,
             <&zip_xy_to_scroll_mapper>,
-            <&scroll_inertia_v>,
             <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
             <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>;
 };
