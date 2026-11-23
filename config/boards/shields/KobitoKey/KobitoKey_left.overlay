@@ -77,7 +77,7 @@
     input-processors =
             <&sensor_rotation_left>,
             <&zip_xy_transform INPUT_TRANSFORM_X_INVERT>,
-            <&zip_temp_layer 3 5000>; /* オートマウスレイヤーの指定とトラボ操作及びマウスボタン押下後に滞留する時間 */
+            <&zip_temp_layer 4 5000>; /* オートマウスレイヤーの指定とトラボ操作及びマウスボタン押下後に滞留する時間 */
     };
 
 / {
@@ -100,9 +100,9 @@
         <&zip_scroll_transform INPUT_TRANSFORM_Y_INVERT>,
         <&zip_scroll_transform INPUT_TRANSFORM_X_INVERT>;
 
-    /* SYB (layer 2) 有効中は横スクロール: 縦の動きを X/Y 入替で横ホイールへ */
+    /* SYB (layer 3) 有効中は横スクロール: 縦の動きを X/Y 入替で横ホイールへ */
     hscroll_syb {
-        layers = <2>;
+        layers = <3>;
 
         input-processors =
             <&sensor_rotation_right>,
