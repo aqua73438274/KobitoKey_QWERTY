@@ -299,6 +299,25 @@
             bindings = <&kp LSHFT>, <&kp LSHFT>;
             label = "SHIFT_SHIFT";
         };
+
+        // モード入口 (NAV の rc3,4 / rc3,5): IME キーを送ってから文字レイヤー (1) をデフォルト化
+        mode_en: mode_en {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LANGUAGE_2>, <&to 1>;
+            label = "MODE_EN";
+        };
+
+        mode_jp: mode_jp {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <40>;
+            tap-ms = <40>;
+            bindings = <&kp LANGUAGE_1>, <&to 1>;
+            label = "MODE_JP";
+        };
     };
 
     keymap {
@@ -310,7 +329,7 @@
 &kp B           &lt_g 3 Z       &kp D             &kp F         &kp MINUS  &kp SPACE  &kp LC(C)              &kp UP_ARROW    &kp LC(P)               &kp Q
 &hm_l LGUI LC(LS(LA(LEFT_ARROW)))  &hm_l LALT LG(LEFT_ARROW)      &hm_l LSHFT S             &hm_l LCTRL LG(RIGHT_ARROW)      &kp LS(LA(LC(RIGHT_ARROW)))  &kp LA(LC(LG(LEFT_ARROW)))  &hm_r LCTRL LEFT_ARROW         &hm_r LSHFT DOWN_ARROW  &hm_r LALT RIGHT_ARROW         &hm_r LGUI LA(LC(LG(RIGHT_ARROW)))
 &kp LG(UP_ARROW)            &kp LG(LS(LEFT_ARROW))  &kp LC(LA(LG(P)))  &kp LG(LS(RIGHT_ARROW))  &kp K                       &kp F5                      &kp LS(LC(PAGE_DOWN))  &kp LC(T)       &kp LS(PAGE_UP)         &kp LC(W)
-&kp LANGUAGE_2  &kp LALT        &lt 4 A           &lt 4 A   &lt 4 A    &lt 4 A    &lt 4 A     &lt 4 A            &kp LG(LC(LEFT_ARROW))  &kp LG(LC(RIGHT_ARROW))
+&kp LANGUAGE_2  &kp LALT        &lt 4 A           &lt 4 A   &mode_en    &mode_jp    &lt 4 A     &lt 4 A            &kp LG(LC(LEFT_ARROW))  &kp LG(LC(RIGHT_ARROW))
             >;
         };
 
