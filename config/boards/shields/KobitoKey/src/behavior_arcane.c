@@ -13,7 +13,10 @@
  * QMK keymap (keyball44/keymaps/aqua/aqua.c), where entries that return the
  * same letter act as plain repeats. Only the entries whose output differs
  * from the input are listed here; everything else falls back to repeat.
- * Table 0 = left arcane key (LMAGIC), table 1 = right arcane key (RMAGIC).
+ * The binding parameter selects the table: 0 = left arcane key (LMAGIC),
+ * 1 = right arcane key (RMAGIC). One parameter is taken (rather than zero)
+ * so the behavior can sit on the tap side of a hold-tap, whose binding
+ * cells must total two.
  */
 
 #define DT_DRV_COMPAT zmk_behavior_arcane
@@ -71,7 +74,6 @@ static const uint8_t arcane_table_right[0x1E] = {
 };
 
 struct behavior_arcane_config {
-    uint8_t table;
     uint8_t usage_pages_count;
     uint16_t usage_pages[];
 };
@@ -84,7 +86,6 @@ struct behavior_arcane_data {
 static int on_arcane_binding_pressed(struct zmk_behavior_binding *binding,
                                      struct zmk_behavior_binding_event event) {
     const struct device *dev = zmk_behavior_get_binding(binding->behavior_dev);
-    const struct behavior_arcane_config *config = dev->config;
     struct behavior_arcane_data *data = dev->data;
 
     if (data->last_keycode_pressed.usage_page == 0) {
@@ -102,7 +103,7 @@ static int on_arcane_binding_pressed(struct zmk_behavior_binding *binding,
         data->current_keycode_pressed.keycode >= 0x04 &&
         data->current_keycode_pressed.keycode <= 0x1D) {
         const uint8_t *table =
-            (config->table == 0) ? arcane_table_left : arcane_table_right;
+            (binding->param1 == 0) ? arcane_table_left : arcane_table_right;
         uint8_t mapped = table[data->current_keycode_pressed.keycode];
         if (mapped != ARCANE_NO_ENTRY) {
             data->current_keycode_pressed.keycode = mapped;
@@ -177,7 +178,6 @@ static int arcane_keycode_state_changed_listener(const zmk_event_t *eh) {
 #define ARCANE_INST(n)                                                                             \
     static struct behavior_arcane_data behavior_arcane_data_##n = {};                              \
     static struct behavior_arcane_config behavior_arcane_config_##n = {                            \
-        .table = DT_INST_PROP(n, table),                                                           \
         .usage_pages = DT_INST_PROP(n, usage_pages),                                               \
         .usage_pages_count = DT_INST_PROP_LEN(n, usage_pages),                                     \
     };                                                                                             \
