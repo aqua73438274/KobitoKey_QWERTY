@@ -1,0 +1,16 @@
+# Copyright (c) 2026 kiyo
+# SPDX-License-Identifier: MIT
+
+description: Arcane key behavior (repeat/magic hybrid)
+
+compatible: "zmk,behavior-arcane"
+
+include: zero_param.yaml
+
+properties:
+  usage-pages:
+    type: array
+    required: true
+  table:
+    type: int
+    required: true
