@@ -102,6 +102,45 @@
             quick-tap-ms = <200>;
         };
 
+        // arcane: repeat/magic ハイブリッド (Keyball の LMAGIC/RMAGIC を移植)。
+        // 直前キーが表にあればその文字、なければ直前キーをリピートする。
+        // 実装はシールド内のカスタムビヘイビア behavior_arcane.c。
+        arcane_l: arcane_left {
+            compatible = "zmk,behavior-arcane";
+            #binding-cells = <0>;
+            usage-pages = <0x07>;
+            table = <0>;
+        };
+
+        arcane_r: arcane_right {
+            compatible = "zmk,behavior-arcane";
+            #binding-cells = <0>;
+            usage-pages = <0x07>;
+            table = <1>;
+        };
+
+        // lt_arc_l: hold = レイヤー (&mo)、tap = arcane 左。
+        lt_arc_l: layer_tap_arcane_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <1>;
+            bindings = <&mo>, <&arcane_l>;
+
+            flavor = "hold-preferred";
+            tapping-term-ms = <HM_TAPPING_TERM>;
+            quick-tap-ms = <200>;
+        };
+
+        // lt_arc_r: hold = &to (NAV 帰還)、tap = arcane 右。
+        lt_arc_r: layer_tap_arcane_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <1>;
+            bindings = <&to>, <&arcane_r>;
+
+            flavor = "hold-preferred";
+            tapping-term-ms = <HM_TAPPING_TERM>;
+            quick-tap-ms = <200>;
+        };
+
         // lt_g: tap-preferred layer-tap (used for G → Navi)
         // 値は main ブランチ準拠 (filterpaper 流の HM 定数を継承せず固定)
         // ユーザの打鍵感覚で main の挙動が最も自然と確認済み (2026-05-29)
@@ -339,7 +378,7 @@
 &kp B           &lt_g 3 Z       &kp D             &kp F         &kp MINUS  &kp SPACE  &kp J           &kp O              &lt_g 3 U        &kp Q
 &hm_l  LGUI H   &hm_l LALT R    &hm_l LSHFT S     &hm_l LCTRL T &kp G      &kp Y      &hm_r  LCTRL N  &hm_r  LSHFT A     &hm_r  LALT I    &hm_r  LGUI E
 &kp P           &kp L           &kp M             &kp C         &kp K      &kp X      &kp W           &kp COMMA          &kp DOT          &kp V
-&kp LANGUAGE_2  &kp LALT        &lt 3 A           &lt 2 SPACE   &lt 4 A    &lt_nav 0 A    &lt_nav 0 ENTER     &lt 5 A            &kp RSHFT        &kp LANGUAGE_1
+&kp LANGUAGE_2  &kp LALT        &lt 3 A           &lt 2 SPACE   &lt_arc_l 4    &lt_arc_r 0    &lt_nav 0 ENTER     &lt 5 A            &kp RSHFT        &kp LANGUAGE_1
             >; 
         };
 
