@@ -5,12 +5,9 @@ description: Arcane key behavior (repeat/magic hybrid)
 
 compatible: "zmk,behavior-arcane"
 
-include: zero_param.yaml
+include: one_param.yaml
 
 properties:
   usage-pages:
     type: array
-    required: true
-  table:
-    type: int
     required: true
