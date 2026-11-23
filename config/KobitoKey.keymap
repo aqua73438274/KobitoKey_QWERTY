@@ -305,7 +305,7 @@
             label = "NUM";
             bindings = <
 &kp COLON       &kp LESS_THAN   &kp GREATER_THAN  &kp KP_LPAR  &kp KP_RPAR    &kp CARET        &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp PERCENT
-&mt LEFT_GUI X  &mt LEFT_ALT C  &mt LEFT_SHIFT B  &mt LCTRL A  &kp KP_MINUS   &kp KP_PLUS      &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_EQUAL
+&hm_l LGUI X    &hm_l LALT C    &hm_l LSHFT B     &hm_l LCTRL A  &kp KP_MINUS   &kp KP_PLUS      &hm_r LCTRL KP_NUMBER_4  &hm_r LSHFT KP_NUMBER_5  &hm_r LALT KP_NUMBER_6  &hm_r LGUI KP_EQUAL
 &kp AT_SIGN     &kp F           &kp E             &kp D        &kp KP_DIVIDE  &kp KP_ASTERISK  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp DOT
 &trans          &trans          &trans            &kp LSHFT    &trans         &trans           &kp ENTER        &kp KP_NUMBER_0  &trans           &trans
             >;
@@ -315,7 +315,7 @@
             label = "SYB";
             bindings = <
 &kp GRAVE        &kp LESS_THAN  &kp GREATER_THAN  &kp KP_MINUS       &kp PIPE2      &kp CARET    &kp LEFT_BRACE  &kp RIGHT_BRACE  &kp DOLLAR     &kp BACKSLASH
-&cm_excl         &kp ASTERISK   &kp KP_SLASH      &kp EQUAL          &kp AMPERSAND  &kp HASH     &kp LPAR        &kp RPAR         &kp SEMICOLON  &kp DOUBLE_QUOTES
+&cm_excl         &hm_l LALT ASTERISK   &hm_l LSHFT KP_SLASH      &hm_l LCTRL EQUAL          &kp AMPERSAND  &kp HASH     &hm_r LCTRL LPAR        &hm_r LSHFT RPAR         &hm_r LALT SEMICOLON  &hm_r LGUI DOUBLE_QUOTES
 &kp TILDE        &kp KP_PLUS    &kp LEFT_BRACKET  &kp RIGHT_BRACKET  &kp PERCENT    &kp AT_SIGN  &kp COLON       &kp UNDERSCORE   &kp QUESTION   &kp SINGLE_QUOTE
 &trans           &trans         &trans            &trans             &trans         &trans       &trans          &trans           &trans         &trans
             >;
@@ -325,7 +325,7 @@
             label = "FUNC";
             bindings = <
 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp F1   &kp F7  &kp F8  &kp F9  &kp F10
-&trans        &trans        &trans        &trans        &bt BT_CLR      &kp F6   &kp F4  &kp F5  &kp F6  &kp F11
+&trans        &trans        &trans        &trans        &bt BT_CLR      &kp F6   &hm_r LCTRL F4  &hm_r LSHFT F5  &hm_r LALT F6  &hm_r LGUI F11
 &trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &kp F11  &kp F1  &kp F2  &kp F3  &kp F12
 &trans        &trans        &trans        &trans        &trans          &trans   &trans  &trans  &trans  &trans
             >;
@@ -345,7 +345,7 @@
             label = "NAV";
             bindings = <
 &trans                      &trans                  &trans             &trans                   &trans                       &trans                      &kp LC(C)              &kp UP_ARROW    &kp LC(P)               &trans
-&kp LC(LS(LA(LEFT_ARROW)))  &kp LG(LEFT_ARROW)      &trans             &kp LG(RIGHT_ARROW)      &kp LS(LA(LC(RIGHT_ARROW)))  &kp LA(LC(LG(LEFT_ARROW)))  &kp LEFT_ARROW         &kp DOWN_ARROW  &kp RIGHT_ARROW         &kp LA(LC(LG(RIGHT_ARROW)))
+&hm_l LGUI LC(LS(LA(LEFT_ARROW)))  &hm_l LALT LG(LEFT_ARROW)      &trans             &hm_l LCTRL LG(RIGHT_ARROW)      &kp LS(LA(LC(RIGHT_ARROW)))  &kp LA(LC(LG(LEFT_ARROW)))  &hm_r LCTRL LEFT_ARROW         &hm_r LSHFT DOWN_ARROW  &hm_r LALT RIGHT_ARROW         &hm_r LGUI LA(LC(LG(RIGHT_ARROW)))
 &kp LG(UP_ARROW)            &kp LG(LS(LEFT_ARROW))  &kp LC(LA(LG(P)))  &kp LG(LS(RIGHT_ARROW))  &trans                       &kp F5                      &kp LS(LC(PAGE_DOWN))  &kp LC(T)       &kp LS(PAGE_UP)         &kp LC(W)
 &trans                      &trans                  &lt 3 A            &lt 3 A                  &lt 3 A                      &lt 3 A                     &lt 3 A                &lt 3 A         &kp LG(LC(LEFT_ARROW))  &kp LG(LC(RIGHT_ARROW))
             >;
