@@ -3,3 +3,15 @@ config SHIELD_KOBITOKEY_LEFT
 
 config SHIELD_KOBITOKEY_RIGHT
     def_bool $(shields_list_contains,KobitoKey_right)
+
+config KOBITOKEY_IDLE_RETURN_WATCH_LAYER
+    int "Layer watched by the idle layer return (typing layer)"
+    default 1
+
+config KOBITOKEY_IDLE_RETURN_HOME_LAYER
+    int "Layer to return to after the idle timeout (home layer)"
+    default 0
+
+config KOBITOKEY_IDLE_RETURN_TIMEOUT_MS
+    int "Idle timeout before returning to the home layer (ms)"
+    default 30000
