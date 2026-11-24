@@ -135,6 +135,13 @@
             quick-tap-ms = <200>;
         };
 
+        // jis_tog: JIS/US 出力切替 (Keyball の OUT_TOG + A2J 変換を移植)。
+        // パラメータ 0 = トグル、1 = JIS オン、2 = US オン。状態は settings に保存。
+        jis_tog: jis_toggle {
+            compatible = "zmk,behavior-jis-toggle";
+            #binding-cells = <1>;
+        };
+
         // lt_g: tap-preferred layer-tap (used for G → Navi)
         // 値は main ブランチ準拠 (filterpaper 流の HM 定数を継承せず固定)
         // ユーザの打鍵感覚で main の挙動が最も自然と確認済み (2026-05-29)
@@ -400,7 +407,7 @@
             label = "FUNC";
             bindings = <
 &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4    &kp F1   &kp F7  &kp F8  &kp F9  &kp F10
-&trans        &trans        &trans        &trans        &bt BT_CLR      &kp F6   &hm_r LCTRL F4  &hm_r LSHFT F5  &hm_r LALT F6  &hm_r LGUI F11
+&jis_tog 0    &trans        &trans        &trans        &bt BT_CLR      &kp F6   &hm_r LCTRL F4  &hm_r LSHFT F5  &hm_r LALT F6  &hm_r LGUI F11
 &trans        &trans        &trans        &trans        &bt BT_CLR_ALL  &kp F11  &kp F1  &kp F2  &kp F3  &kp F12
 &trans        &trans        &trans        &trans        &trans          &trans   &trans  &trans  &trans  &trans
             >;
