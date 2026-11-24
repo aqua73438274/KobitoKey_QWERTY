@@ -13,6 +13,7 @@
  * (NVS flash), the ZMK equivalent of QMK's EEPROM user config.
  *
  * Toggle behavior parameter: 0 = toggle, 1 = JIS on, 2 = US on.
+ * The toggle key sits on the FUNC layer, home row, leftmost position.
  */
 
 #define DT_DRV_COMPAT zmk_behavior_jis_toggle
