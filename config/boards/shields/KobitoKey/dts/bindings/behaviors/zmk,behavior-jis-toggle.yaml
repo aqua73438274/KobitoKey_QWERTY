@@ -1,0 +1,8 @@
+# Copyright (c) 2026 kiyo
+# SPDX-License-Identifier: MIT
+
+description: JIS/US output mode toggle behavior
+
+compatible: "zmk,behavior-jis-toggle"
+
+include: one_param.yaml
