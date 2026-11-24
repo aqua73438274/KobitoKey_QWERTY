@@ -143,6 +143,57 @@
             #binding-cells = <1>;
         };
 
+        // cp_paste / cp_copy: コピペマクロ (Toad の Cornix キーマップから移植、Mac→Windows に読み替え)。
+        // mod-morph (Shift の有無) の中に hold-tap (tap/hold) を入れ子にして 3〜4 通りを出し分ける。
+        // ht_cp: hold/tap とも &kp のコードをそのまま送る汎用 hold-tap。
+        ht_cp: ht_cp {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+        };
+
+        // ht_cp_url: cp_copy の Shift 側。tap は URL コピー マクロ、hold は &kp。
+        ht_cp_url: ht_cp_url {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&url_copy>;
+            flavor = "balanced";
+            tapping-term-ms = <280>;
+            quick-tap-ms = <175>;
+            require-prior-idle-ms = <150>;
+        };
+
+        // url_copy: Ctrl+L でアドレスバーへ移動してから Ctrl+C (パラメータはダミー)。
+        url_copy: url_copy {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            wait-ms = <30>;
+            tap-ms = <30>;
+            bindings = <&kp LC(L)>, <&kp LC(C)>;
+        };
+
+        // cp_paste (NAV の D 位置): tap = Ctrl+V、hold = Win+V (クリップボード履歴)、
+        // Shift+tap = Ctrl+Shift+V (書式なし貼り付け想定)。
+        cp_paste: cp_paste {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&ht_cp LG(V) LC(V)>, <&kp LC(LS(V))>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
+        // cp_copy (NAV の F 位置): tap = Ctrl+C、hold = Win+Shift+S (範囲スクショ→コピー)、
+        // Shift+tap = URL コピー、Shift+hold = Win+Shift+T (PowerToys テキスト抽出 = OCR 想定)。
+        cp_copy: cp_copy {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&ht_cp LG(LS(S)) LC(C)>, <&ht_cp_url LG(LS(T)) 0>;
+            mods = <(MOD_LSFT|MOD_RSFT)>;
+        };
+
         // lt_g: tap-preferred layer-tap (used for G → Navi)
         // 値は main ブランチ準拠 (filterpaper 流の HM 定数を継承せず固定)
         // ユーザの打鍵感覚で main の挙動が最も自然と確認済み (2026-05-29)
@@ -367,7 +418,7 @@
         NAV {
             label = "NAV";
             bindings = <
-&kp B           &lt_g 3 Z       &kp D             &kp F         &kp MINUS  &kp SPACE  &kp LC(C)              &kp UP_ARROW    &kp LC(P)               &kp Q
+&kp B           &lt_g 3 Z       &cp_paste         &cp_copy      &kp MINUS  &kp SPACE  &kp LC(C)              &kp UP_ARROW    &kp LC(P)               &kp Q
 &hm_l LGUI LC(LS(LA(LEFT_ARROW)))  &hm_l LALT LG(LEFT_ARROW)      &hm_l LSHFT S             &hm_l LCTRL LG(RIGHT_ARROW)      &kp LS(LA(LC(RIGHT_ARROW)))  &kp LA(LC(LG(LEFT_ARROW)))  &hm_r LCTRL LEFT_ARROW         &hm_r LSHFT DOWN_ARROW  &hm_r LALT RIGHT_ARROW         &hm_r LGUI LA(LC(LG(RIGHT_ARROW)))
 &kp LG(UP_ARROW)            &kp LG(LS(LEFT_ARROW))  &kp LC(LA(LG(P)))  &kp LG(LS(RIGHT_ARROW))  &kp K                       &kp F5                      &kp LS(LC(PAGE_DOWN))  &kp LC(T)       &kp LS(PAGE_UP)         &kp LC(W)
 &kp LANGUAGE_2  &kp LALT        &lt 4 A           &lt 4 A   &mode_en    &mode_jp    &lt 4 A     &lt 4 A            &kp LG(LC(LEFT_ARROW))  &kp LG(LC(RIGHT_ARROW))
