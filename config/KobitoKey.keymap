@@ -194,6 +194,17 @@
             mods = <(MOD_LSFT|MOD_RSFT)>;
         };
 
+        // task_view: 押している間タスクビュー (Win+Tab) を開き、離すと左クリック
+        // (ろほん氏の roBa キーマップより)。押下中は Win+Tab を保持し、トラックボールで
+        // ウィンドウにカーソルを合わせ、離した瞬間のクリックで切り替える。
+        // ※キーへは未登録。使うときは任意のマスに &task_view を置く。
+        task_view: task_view {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LG(TAB)>, <&macro_pause_for_release>, <&macro_release &kp LG(TAB)>, <&macro_tap &mkp LCLK>;
+            label = "TASK_VIEW";
+        };
+
         // lt_g: tap-preferred layer-tap (used for G → Navi)
         // 値は main ブランチ準拠 (filterpaper 流の HM 定数を継承せず固定)
         // ユーザの打鍵感覚で main の挙動が最も自然と確認済み (2026-05-29)
