@@ -137,6 +137,7 @@
 
         // jis_tog: JIS/US 出力切替 (Keyball の OUT_TOG + A2J 変換を移植)。
         // パラメータ 0 = トグル、1 = JIS オン、2 = US オン。状態は settings に保存。
+        // 切替キーは FUNC レイヤーのホームロー左端に配置。
         jis_tog: jis_toggle {
             compatible = "zmk,behavior-jis-toggle";
             #binding-cells = <1>;
