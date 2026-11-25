@@ -28,7 +28,7 @@ static void idle_return_work_handler(struct k_work *work) {
     if (zmk_keymap_layer_default() == WATCH_LAYER) {
         LOG_INF("idle %d ms in layer %d, returning to layer %d", TIMEOUT_MS, WATCH_LAYER,
                 HOME_LAYER);
-        zmk_keymap_layer_to(HOME_LAYER);
+        zmk_keymap_layer_to(HOME_LAYER, false); /* ZMK main: locking arg */
     }
 }
 
