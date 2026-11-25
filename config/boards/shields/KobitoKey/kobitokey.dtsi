@@ -3,6 +3,22 @@
 #include "KobitoKey-layouts.dtsi"
 
 / {
+    /* RGBLED widget (main): XIAO BLE onboard RGB LED aliases.
+       Normally provided by rgbled_adapter's xiao_ble_zmk board overlay,
+       which only applies with the //zmk board extension. */
+    aliases {
+        led-red = &led0;
+        led-green = &led1;
+        led-blue = &led2;
+    };
+
+    leds {
+        status = "okay";
+    };
+};
+
+
+/ {
     /* 行列スキャン：rowは左右共通、colは左右で分ける */
     kscan0: kscan0 {
         compatible = "zmk,kscan-gpio-matrix";
